@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { exercises } from "@/lib/data";
-import ExerciseCard from "@/components/ExerciseCard";
-import WeeklyPlan from "@/components/WeeklyPlan";
-import StatsScreen from "@/components/StatsScreen";
-import LanguageSelector from "@/components/LanguageSelector";
-import LevelSystem from "@/components/LevelSystem";
+import { Button } from "./components/ui/button";
+import { Card, CardContent } from "./components/ui/card";
+import { exercises } from "./lib/data";
+import ExerciseCard from "./components/ExerciseCard";
+import WeeklyPlan from "./components/WeeklyPlan";
+import StatsScreen from "./components/StatsScreen";
+import LanguageSelector from "./components/LanguageSelector";
+import LevelSystem from "./components/LevelSystem";
 
 export default function App() {
   const [day, setDay] = useState(1);
