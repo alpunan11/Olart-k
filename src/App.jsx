@@ -13,8 +13,16 @@ export default function App() {
   const [language, setLanguage] = useState("tr");
   const [showStats, setShowStats] = useState(false);
   const [level, setLevel] = useState(1);
+  const [completed, setCompleted] = useState([]); // yeni
 
   const todayExercises = exercises[day] || [];
+
+  const handleComplete = (exerciseName) => {
+    if (!completed.includes(exerciseName)) {
+      setCompleted([...completed, exerciseName]);
+      setLevel((prev) => Math.min(prev + 1, 10)); // max seviye 10
+    }
+  };
 
   return (
     <div className="min-h-screen p-4 bg-white text-black">
@@ -31,7 +39,12 @@ export default function App() {
         <h2 className="text-2xl font-semibold mb-2">Gün {day} Egzersizleri</h2>
         <div className="grid gap-4">
           {todayExercises.map((exercise, index) => (
-            <ExerciseCard key={index} exercise={exercise} />
+            <ExerciseCard
+              key={index}
+              exercise={exercise}
+              isCompleted={completed.includes(exercise.name)}
+              onComplete={() => handleComplete(exercise.name)}
+            />
           ))}
         </div>
       </div>
@@ -40,7 +53,13 @@ export default function App() {
         {showStats ? "Egzersizlere Dön" : "İstatistikleri Göster"}
       </Button>
 
-      {showStats && <StatsScreen />}
+      {showStats && (
+        <StatsScreen
+          completed={completed}
+          level={level}
+          allExercises={exercises}
+        />
+      )}
     </div>
   );
 }
